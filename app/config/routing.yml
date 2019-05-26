@@ -1,0 +1,108 @@
+ecole_absence:
+    resource: "@EcoleBundle/Controller/AbsenceController.php"
+    type:     annotation
+
+ecole_exercice:
+    resource: "@EcoleBundle/Controller/ExerciceController.php"
+    type:     annotation
+
+ecole_exercice:
+    resource: "@EcoleBundle/Controller/ExerciceController.php"
+    type:     annotation
+
+ecole_seance:
+    resource: "@EcoleBundle/Controller/SeanceController.php"
+    type:     annotation
+
+ecole_seance:
+    resource: "@EcoleBundle/Controller/SeanceController.php"
+    type:     annotation
+
+ecole_etudiant:
+    resource: "@EcoleBundle/Controller/EtudiantController.php"
+    type:     annotation
+
+ecole_prof:
+    resource: "@EcoleBundle/Controller/ProfController.php"
+    type:     annotation
+
+ecole_etudiant:
+    resource: "@EcoleBundle/Controller/EtudiantController.php"
+    type:     annotation
+
+ecole_etudiant:
+    resource: "@EcoleBundle/Controller/EtudiantController.php"
+    type:     annotation
+
+ecole_etudiant:
+    resource: "@EcoleBundle/Controller/EtudiantController.php"
+    type:     annotation
+ecole_home:
+    resource: "@EcoleBundle/Controller/HomeController.php"
+    type:     annotation
+
+ecole_prof:
+    resource: "@EcoleBundle/Controller/ProfController.php"
+    type:     annotation
+
+ecole_note:
+    resource: "@EcoleBundle/Controller/NoteController.php"
+    type:     annotation
+
+ecole_classe:
+    resource: "@EcoleBundle/Controller/ClasseController.php"
+    type:     annotation
+
+ecole_evaluation:
+    resource: "@EcoleBundle/Controller/EvaluationController.php"
+    type:     annotation
+
+ecole_prof:
+    resource: "@EcoleBundle/Controller/ProfController.php"
+    type:     annotation
+
+ecole_seance:
+    resource: "@EcoleBundle/Controller/SeanceController.php"
+    type:     annotation
+
+ecole_seance:
+    resource: "@EcoleBundle/Controller/SeanceController.php"
+    type:     annotation
+ecole_emploi:
+    resource: "@EcoleBundle/Controller/EmploiController.php"
+    type:     annotation
+ecole_seance:
+    resource: "@EcoleBundle/Controller/SeanceController.php"
+    type:     annotation
+
+ecole_evaluation:
+    resource: "@EcoleBundle/Controller/EvaluationController.php"
+    type:     annotation
+
+ecole_prof:
+    resource: "@EcoleBundle/Controller/ProfController.php"
+    type:     annotation
+
+ecole_evaluation:
+    resource: "@EcoleBundle/Controller/EvaluationController.php"
+    type:     annotation
+
+ecole_note:
+    resource: "@EcoleBundle/Controller/NoteController.php"
+    type:     annotation
+
+ecole_etudiant:
+    resource: "@EcoleBundle/Controller/EtudiantController.php"
+    type:     annotation
+
+ecole_classe:
+    resource: "@EcoleBundle/Controller/ClasseController.php"
+    type:     annotation
+
+
+
+ecole:
+    resource: "@EcoleBundle/Resources/config/routing.yml"
+    prefix:   /
+
+

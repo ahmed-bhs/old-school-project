@@ -1,0 +1,137 @@
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+{% if app.session.flashBag.has('error') %}
+        <div class="alert alert-danger">
+            {% for msg in app.session.flashBag.get('error') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{{form_start(form)}}
+
+
+
+{{form_row(form.classe,{attr:{'onClick':"$('#loading').fadeIn('fast').delay(1000).fadeOut('fast');"}})}}
+{{form_row(form.semestre,{attr:{'onClick':"$('#loading').fadeIn('fast').delay(1000).fadeOut('fast');"}})}}
+<label>evaluation</label>
+<select id="mySelect"  name="evluation">
+
+
+</select><img id="loading"  style="display: none;" height="20px" src="../../../loading.gif">
+<input type="submit" value="send">
+{{form_end(form)}}
+<script type="text/javascript">$(function() {
+
+/*  $('#form_classe').change(function() {
+  var classe=$( "#form_classe option:selected" ).val();*/
+
+
+				  $('#form_semestre ').on(' click',function() {
+
+				  	/*if ($(this).val() === '2') {
+				        // Do something for option "b"
+				    }*/
+				   var semestre=$( "#form_semestre option:selected" ).text();
+				   
+
+				    $.ajax({
+				      method: "post",
+				      data: {choice:semestre },
+				      success: function(data) { 
+ $("#loading").fadeIn('fast').delay(1000).fadeOut('fast');
+
+						console.log(data); 
+				      	console.log('y'); 
+
+				      	  
+
+				      
+
+				    $('#mySelect').children("option").remove();
+
+  
+
+ 
+				
+				
+				      $.each(data, function (i,item) {
+
+				      
+
+				    $('#mySelect').append($('<option>', { 
+				        value: i,
+				        text : item
+
+				    }));
+				});
+				 
+
+
+
+				  },
+				      error: function(XMLHttpRequest, textStatus, errorThrown)
+				              {
+				                console.log('n');
+				              },
+				      url: "{{path('a')}}",
+				     
+				    });
+				  });
+
+
+
+
+
+
+});</script>
+
+<script type="text/javascript">$(function() {
+  $('#form_classe').on(' click',function() {
+
+
+  	/*if ($(this).val() === '2') {
+        // Do something for option "b"
+    }*/
+   var classe=$( "#form_classe option:selected" ).val();
+
+    $.ajax({
+      method: "post",
+      data: {classe:classe },
+ 	  success:  function(data) { 
+
+						console.log(data); 
+				      	console.log('y'); 
+
+				      	  
+
+				     
+
+				    $('#mySelect').children("option").remove();
+				
+				      $.each(data, function (i,item) {
+
+				      
+
+				    $('#mySelect').append($('<option>', { 
+				        value: i,
+				        text : item 
+				    }));
+				});
+				 
+
+
+
+				  },
+      error: function(XMLHttpRequest, textStatus, errorThrown)
+              {
+                console.log('n');
+              },
+      url: "{{path('a')}}",
+     
+    });
+  });
+});</script>

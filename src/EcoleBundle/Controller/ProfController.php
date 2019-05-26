@@ -1,0 +1,314 @@
+<?php
+
+namespace EcoleBundle\Controller;
+
+use EcoleBundle\Entity\Prof;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\View\TwitterBootstrap3View;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+
+/**
+ * Prof controller.
+ *
+ * @Route("/prof")
+ */
+class ProfController extends Controller
+{
+    /**
+     * Lists all Prof entities.
+     *
+     * @Route("/", name="prof")
+     * @Method("GET")
+     */
+    public function indexAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $queryBuilder = $em->getRepository('EcoleBundle:Prof')->createQueryBuilder('e');
+
+        list($filterForm, $queryBuilder) = $this->filter($queryBuilder, $request);
+        list($profs, $pagerHtml) = $this->paginator($queryBuilder, $request);
+
+        $totalOfRecordsString = $this->getTotalOfRecordsString($queryBuilder, $request);
+
+        return $this->render('prof/index.html.twig', [
+            'profs' => $profs,
+            'pagerHtml' => $pagerHtml,
+            'filterForm' => $filterForm->createView(),
+            'totalOfRecordsString' => $totalOfRecordsString,
+        ]);
+    }
+
+    /**
+     * Create filter form and process filter request.
+     */
+    protected function filter($queryBuilder, Request $request)
+    {
+        $session = $request->getSession();
+        $filterForm = $this->createForm('EcoleBundle\Form\ProfFilterType');
+
+        // Reset filter
+        if ('reset' == $request->get('filter_action')) {
+            $session->remove('ProfControllerFilter');
+        }
+
+        // Filter action
+        if ('filter' == $request->get('filter_action')) {
+            // Bind values from the request
+            $filterForm->handleRequest($request);
+
+            if ($filterForm->isValid()) {
+                // Build the query from the given form object
+                $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
+                // Save filter to session
+                $filterData = $filterForm->getData();
+                $session->set('ProfControllerFilter', $filterData);
+            }
+        } else {
+            // Get filter from session
+            if ($session->has('ProfControllerFilter')) {
+                $filterData = $session->get('ProfControllerFilter');
+
+                foreach ($filterData as $key => $filter) { //fix for entityFilterType that is loaded from session
+                    if (\is_object($filter)) {
+                        $filterData[$key] = $queryBuilder->getEntityManager()->merge($filter);
+                    }
+                }
+
+                $filterForm = $this->createForm('EcoleBundle\Form\ProfFilterType', $filterData);
+                $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
+            }
+        }
+
+        return [$filterForm, $queryBuilder];
+    }
+
+    /**
+     * Get results from paginator and get paginator view.
+     */
+    protected function paginator($queryBuilder, Request $request)
+    {
+        //sorting
+        $sortCol = $queryBuilder->getRootAlias() . '.' . $request->get('pcg_sort_col', 'id');
+        $queryBuilder->orderBy($sortCol, $request->get('pcg_sort_order', 'desc'));
+        // Paginator
+        $adapter = new DoctrineORMAdapter($queryBuilder);
+        $pagerfanta = new Pagerfanta($adapter);
+        $pagerfanta->setMaxPerPage($request->get('pcg_show', 10));
+
+        try {
+            $pagerfanta->setCurrentPage($request->get('pcg_page', 1));
+        } catch (\Pagerfanta\Exception\OutOfRangeCurrentPageException $ex) {
+            $pagerfanta->setCurrentPage(1);
+        }
+
+        $entities = $pagerfanta->getCurrentPageResults();
+
+        // Paginator - route generator
+        $me = $this;
+        $routeGenerator = function ($page) use ($me, $request) {
+            $requestParams = $request->query->all();
+            $requestParams['pcg_page'] = $page;
+
+            return $me->generateUrl('prof', $requestParams);
+        };
+
+        // Paginator - view
+        $view = new TwitterBootstrap3View();
+        $pagerHtml = $view->render($pagerfanta, $routeGenerator, [
+            'proximity' => 3,
+            'prev_message' => 'previous',
+            'next_message' => 'next',
+        ]);
+
+        return [$entities, $pagerHtml];
+    }
+
+    /*
+     * Calculates the total of records string
+     */
+    protected function getTotalOfRecordsString($queryBuilder, $request)
+    {
+        $totalOfRecords = $queryBuilder->select('COUNT(e.id)')->getQuery()->getSingleScalarResult();
+        $show = $request->get('pcg_show', 10);
+        $page = $request->get('pcg_page', 1);
+
+        $startRecord = ($show * ($page - 1)) + 1;
+        $endRecord = $show * $page;
+
+        if ($endRecord > $totalOfRecords) {
+            $endRecord = $totalOfRecords;
+        }
+
+        return "Showing $startRecord - $endRecord of $totalOfRecords Records.";
+    }
+
+    /**
+     * Displays a form to create a new Prof entity.
+     *
+     * @Route("/new", name="prof_new")
+     * @Method({"GET", "POST"})
+     */
+    public function newAction(Request $request)
+    {
+        $prof = new Prof();
+        $form = $this->createForm('EcoleBundle\Form\ProfType', $prof);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($prof);
+            $em->flush();
+
+            $editLink = $this->generateUrl('prof_edit', ['id' => $prof->getId()]);
+            $this->get('session')->getFlashBag()->add('success', "<a href='$editLink'>Un enseignant a  été créé.</a>");
+
+            $nextAction = 'save' == $request->get('submit') ? 'prof' : 'prof_new';
+
+            return $this->redirectToRoute($nextAction);
+        }
+
+        return $this->render('prof/new.html.twig', [
+            'prof' => $prof,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * Finds and displays a Prof entity.
+     *
+     * @Route("/{id}", name="prof_show")
+     * @Method("GET")
+     */
+    public function showAction(Prof $prof)
+    {
+        $deleteForm = $this->createDeleteForm($prof);
+
+        return $this->render('prof/show.html.twig', [
+            'prof' => $prof,
+            'delete_form' => $deleteForm->createView(),
+        ]);
+    }
+
+    /**
+     * Displays a form to edit an existing Prof entity.
+     *
+     * @Route("/{id}/edit", name="prof_edit")
+     * @Method({"GET", "POST"})
+     */
+    public function editAction(Request $request, Prof $prof)
+    {
+        $deleteForm = $this->createDeleteForm($prof);
+        $editForm = $this->createForm('EcoleBundle\Form\ProfType', $prof);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($prof);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'Edited Successfully!');
+
+            return $this->redirectToRoute('prof_edit', ['id' => $prof->getId()]);
+        }
+
+        return $this->render('prof/edit.html.twig', [
+            'prof' => $prof,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ]);
+    }
+
+    /**
+     * Deletes a Prof entity.
+     *
+     * @Route("/{id}", name="prof_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, Prof $prof)
+    {
+        $form = $this->createDeleteForm($prof);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($prof);
+            $em->flush();
+            $this->get('session')->getFlashBag()->add('success', 'The Prof was deleted successfully');
+        } else {
+            $this->get('session')->getFlashBag()->add('error', 'Problem with deletion of the Prof');
+        }
+
+        return $this->redirectToRoute('prof');
+    }
+
+    /**
+     * Creates a form to delete a Prof entity.
+     *
+     * @param Prof $prof The Prof entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Prof $prof)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('prof_delete', ['id' => $prof->getId()]))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
+    }
+
+    /**
+     * Delete Prof by id.
+     *
+     * @Route("/delete/{id}", name="prof_by_id_delete")
+     * @Method("GET")
+     */
+    public function deleteByIdAction(Prof $prof)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        try {
+            $em->remove($prof);
+            $em->flush();
+            $this->get('session')->getFlashBag()->add('success', 'The Prof was deleted successfully');
+        } catch (Exception $ex) {
+            $this->get('session')->getFlashBag()->add('error', 'Problem with deletion of the Prof');
+        }
+
+        return $this->redirect($this->generateUrl('prof'));
+    }
+
+    /**
+     * Bulk Action.
+     * @Route("/bulk-action/", name="prof_bulk_action")
+     * @Method("POST")
+     */
+    public function bulkAction(Request $request)
+    {
+        $ids = $request->get('ids', []);
+        $action = $request->get('bulk_action', 'delete');
+
+        if ('delete' == $action) {
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $repository = $em->getRepository('EcoleBundle:Prof');
+
+                foreach ($ids as $id) {
+                    $prof = $repository->find($id);
+                    $em->remove($prof);
+                    $em->flush();
+                }
+
+                $this->get('session')->getFlashBag()->add('success', 'profs was deleted successfully!');
+            } catch (Exception $ex) {
+                $this->get('session')->getFlashBag()->add('error', 'Problem with deletion of the profs ');
+            }
+        }
+
+        return $this->redirect($this->generateUrl('prof'));
+    }
+}

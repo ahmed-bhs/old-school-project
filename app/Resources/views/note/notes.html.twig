@@ -1,0 +1,76 @@
+{% extends 'PetkoparaCrudGeneratorBundle::base.html.twig' %}
+
+{% block title %}
+{{ parent() }} - Remplissage des notes :
+{% endblock %}
+
+{% block body %}
+
+<div id="top" class="row">
+    <div class="page-header">
+        <h2> <span class="glyphicon glyphicon-file" aria-hidden="true"></span>Remplissage des notes : </h2>
+    </div>
+</div>
+    
+
+    
+<div class="row">
+
+    <div class="col-md-12">
+<div class="container">
+
+    {% if eva_object is defined %}
+<h4>Description de l'evalauation :</h4>{{eva_object.description}}<br>
+<h4>Date:</h4>{{eva_object.date|date}}<br>
+<h4>Classe:</h4>{{eva_object.classe.description}}<br>
+<h4>Nom de enseignant</h4>{{eva_object.prof.nom}}<br>
+
+ <br>
+{% endif %}
+{% if app.session.flashBag.has('error') %}
+        <div class="alert alert-danger">
+            {% for msg in app.session.flashBag.get('error') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<form action="{{path('notes',{'id':id})}}" method="POST">
+
+
+
+        <div class="table-responsive col-md-12">
+       
+            <table class="table table-striped table-hover table-bordered" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        
+                        <th>id</th>
+                        <th>nom</th>
+                        <th>prenom</th>
+                        <th>note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in students %}
+                    <tr>
+                        <td>{{item.id}} </td>
+                        <td>{{item.nom}}</td>
+                        <td>{{item.prenom}}</td>
+                        <td><input type="text" class="form-control" required="required" name="note{{item.id}}" ></td>
+
+                    </tr>
+                    {% endfor %}
+                 </tbody>
+            </table><div class="form-group">
+<input type="submit" class="btn btn-primary h3 pull-right" value="Valider"></form>
+
+    <a class="btn btn-default" href="{{path('note')}}">
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+        Retourner vers la liste
+    </a>
+</div>
+</div></div>
+</div>
+</div>{% endblock %}

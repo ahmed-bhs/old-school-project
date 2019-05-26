@@ -1,0 +1,28 @@
+{% if eva_object is defined %}
+{{eva_object.description}}<br>
+{{eva_object.date|date}}<br>
+{{eva_object.classe.description}}<br>
+{{eva_object.prof.nom}}<br>
+{{eva_object.prof.matiere}}<br>
+{% endif %}
+{% if app.session.flashBag.has('error') %}
+        <div class="alert alert-danger">
+            {% for msg in app.session.flashBag.get('error') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
+<form action="{{path('notes',{'id':id})}}" method="POST">
+	
+{% for item in students %}{{item.id}}{{item.nom}}
+		<input type="text" name="note{{item.id}}">
+		
+	<br>{% endfor %}
+<input type="submit" value="send"></form>
+
+
+
+//need to work on flush database
+then edit

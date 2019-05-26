@@ -1,0 +1,535 @@
+
+{% extends 'PetkoparaCrudGeneratorBundle::base.html.twig' %}
+
+{% block title %}
+{{ parent() }} -  Edit note
+{% endblock %}
+
+{% block body %}
+
+<div id="top" class="row">
+    <div class="page-header">
+        
+    </div>
+</div>
+{# {% if "now"|date('Ymd')  > evenement.date|date('Ymd') %}
+   Mon évènement est terminé
+{% else %}
+   Mon évènement est à venir / en cours
+{% endif %}{% endif %} #}
+<div class="row">
+
+        <div class="table-responsive col-md-12">
+       
+            <table class="table table-striped table-hover table-bordered" cellspacing="0" cellpadding="0">
+                <thead>
+                	
+
+	
+                    <tr>
+                        <th>Jour </th>                  
+                        <th>8h30-9H</th>
+                            <th>9H-9h30</th>
+                        <th>9H30-10h</th>
+                        <th>10h-10h30</th>
+                        <th>10h30-11H</th>
+                        <th>11H-11h30</th>
+                        <th>11h30-12h</th>
+                        <th>12h-12h30</th>
+                        <th>12h30-13h</th>
+                        <th>13H-13h30</th>
+                       <th>13h30-14h</th>
+                        <th>14h-14h30</th>
+                        <th>14h30-15h</th>
+                        <th>15h-15h30</th>
+                        <th>15h30-16h </th>
+                        <th>16h-16h30</th>
+                        <th>16h30-17h</th>
+                        <th>17h-17h30</th>
+                        <th>18h-18h30</th>
+                        <th>18H-18h30</th>
+              
+
+
+         
+
+                    </tr>
+                </thead>
+                <tbody>
+				                    <tr>
+				                        <td>Lundi</td>
+				                        <td>{% for item in seances %}
+{% if item.jour==2 %}
+
+{% if    item.debut|date('H:i:s') < '09:00:00'  and  item.fin|date('H:i:s') >= '09:00:00'   %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+
+
+
+				                        <td>{% for item in seances %}
+
+				                        	    {% if item.jour==2 %}{%  if  ( item.debut|date('H:i:s') >= '09:00:00' and  item.debut|date('H:i:s') <= '09:30:00' ) or (  item.debut|date('H:i:s') < '09:00:00' and  item.fin|date('H:i:s') > '09:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+				                        <td>{% for item in seances %}
+    {% if item.jour==2 %}{%  if  ( item.debut|date('H:i:s') >= '09:30:00' and  item.debut|date('H:i:s') <= '10:00:00' ) or (  item.debut|date('H:i:s') < '09:30:00' and  item.fin|date('H:i:s') > '09:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}
+
+
+				                        </td>
+
+
+
+
+
+
+
+
+
+
+
+                <td>{% for item in seances %}
+
+
+
+
+                	    {% if item.jour==2 %}{%  if  ( item.debut|date('H:i:s') >= '10:00:00' and  item.debut|date('H:i:s') <= '10:30:00' ) or (  item.debut|date('H:i:s') < '10:00:00' and  item.fin|date('H:i:s') > '10:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <td>
+
+
+                	{% for item in seances %}{% if item.jour==2 %}{%  if ( ( item.debut|date('H:i:s') >= '10:30:00' and  item.debut|date('H:i:s') <= '11:00:00' ) or (  item.debut|date('H:i:s') < '10:30:00' and  item.fin|date('H:i:s') > '10:30:00' ) ) %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+
+                <td>{% for item in seances %}    {% if item.jour==2 %}{%  if  ( item.debut|date('H:i:s') >= '11:00:00' and  item.debut|date('H:i:s') <= '11:30:00' ) or (  item.debut|date('H:i:s') < '11:00:00' and  item.fin|date('H:i:s') > '11:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                
+                <td>{% for item in seances %}    {% if item.jour==2 %}{%  if  ( item.debut|date('H:i:s') >= '11:30:00' and  item.debut|date('H:i:s') <= '12:00:00' ) or (  item.debut|date('H:i:s') < '11:30:00' and  item.fin|date('H:i:s') > '11:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==2 %}{%  if  ( item.debut|date('H:i:s') >= '12:00:00' and  item.debut|date('H:i:s') <= '12:30:00' ) or (  item.debut|date('H:i:s') < '12:00:00' and  item.fin|date('H:i:s') > '12:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==2 %}{%  if  ( item.debut|date('H:i:s') >= '12:30:00' and  item.debut|date('H:i:s') <= '13:00:00' ) or (  item.debut|date('H:i:s') < '12:30:00' and  item.fin|date('H:i:s') > '12:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==2 %}{%  if  ( item.debut|date('H:i:s') >= '13:00:00' and  item.debut|date('H:i:s') <= '13:30:00' ) or (  item.debut|date('H:i:s') < '13:00:00' and  item.fin|date('H:i:s') > '13:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==2 %}{%  if  ( item.debut|date('H:i:s') >= '13:30:00' and  item.debut|date('H:i:s') <= '14:00:00' ) or (  item.debut|date('H:i:s') < '13:30:00' and  item.fin|date('H:i:s') > '13:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==2 %}{%  if  ( item.debut|date('H:i:s') >= '14:00:00' and  item.debut|date('H:i:s') <= '14:30:00' ) or (  item.debut|date('H:i:s') < '14:00:00' and  item.fin|date('H:i:s') > '14:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==2 %}{%  if  ( item.debut|date('H:i:s') >= '14:30:00' and  item.debut|date('H:i:s') <= '15:00:00' ) or (  item.debut|date('H:i:s') < '14:30:00' and  item.fin|date('H:i:s') > '14:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==2 %}{%  if  ( item.debut|date('H:i:s') >= '15:00:00' and  item.debut|date('H:i:s') <= '15:30:00' ) or (  item.debut|date('H:i:s') < '15:00:00' and  item.fin|date('H:i:s') > '15:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==2 %}{%  if  ( item.debut|date('H:i:s') >= '15:30:00' and  item.debut|date('H:i:s') <= '16:00:00' ) or (  item.debut|date('H:i:s') < '15:30:00' and  item.fin|date('H:i:s') > '15:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==2 %}{%  if  ( item.debut|date('H:i:s') >= '16:00:00' and  item.debut|date('H:i:s') <= '16:30:00' ) or (  item.debut|date('H:i:s') < '16:00:00' and  item.fin|date('H:i:s') > '16:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==2 %}{%  if  ( item.debut|date('H:i:s') >= '16:30:00' and  item.debut|date('H:i:s') <= '17:00:00' ) or (  item.debut|date('H:i:s') < '16:30:00' and  item.fin|date('H:i:s') > '16:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==2 %}{%  if  ( item.debut|date('H:i:s') >= '17:00:00' and  item.debut|date('H:i:s') <= '17:30:00' ) or (  item.debut|date('H:i:s') < '17:00:00' and  item.fin|date('H:i:s') > '17:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==2 %}{%  if  ( item.debut|date('H:i:s') >= '17:30:00' and  item.debut|date('H:i:s') <= '18:00:00' ) or (  item.debut|date('H:i:s') < '18:30:00' and  item.fin|date('H:i:s') > '17:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==2 %}{%  if  ( item.debut|date('H:i:s') >= '18:00:00' and  item.debut|date('H:i:s') <= '18:30:00' ) or (  item.debut|date('H:i:s') < '19:00:00' and  item.fin|date('H:i:s') > '18:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>			                        				
+				                    </tr>                
+				                    <tr>
+				                        <td>Mardi</td>
+<td>{% for item in seances %}
+{% if item.jour==3 %}
+
+
+				                        	{% if    item.debut|date('H:i:s') < '09:00:00'  and  item.fin|date('H:i:s') >= '09:00:00'   %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+
+
+
+				                        <td>{% for item in seances %}
+
+				                        	    {% if item.jour==3 %}{%  if  ( item.debut|date('H:i:s') >= '09:00:00' and  item.debut|date('H:i:s') <= '09:30:00' ) or (  item.debut|date('H:i:s') < '09:00:00' and  item.fin|date('H:i:s') > '09:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+				                        <td>{% for item in seances %}
+    {% if item.jour==3 %}{%  if  ( item.debut|date('H:i:s') >= '09:30:00' and  item.debut|date('H:i:s') <= '10:00:00' ) or (  item.debut|date('H:i:s') < '09:30:00' and  item.fin|date('H:i:s') > '09:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}
+
+
+				                        </td>
+
+
+
+
+
+
+
+
+
+
+
+                <td>{% for item in seances %}
+
+
+
+
+                	    {% if item.jour==3 %}{%  if  ( item.debut|date('H:i:s') >= '10:00:00' and  item.debut|date('H:i:s') <= '10:30:00' ) or (  item.debut|date('H:i:s') < '10:00:00' and  item.fin|date('H:i:s') > '10:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <td>
+
+
+                	{% for item in seances %}{% if item.jour==3 %}{%  if ( ( item.debut|date('H:i:s') >= '10:30:00' and  item.debut|date('H:i:s') <= '11:00:00' ) or (  item.debut|date('H:i:s') < '10:30:00' and  item.fin|date('H:i:s') > '10:30:00' ) ) %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+
+                <td>{% for item in seances %}    {% if item.jour==3 %}{%  if  ( item.debut|date('H:i:s') >= '11:00:00' and  item.debut|date('H:i:s') <= '11:30:00' ) or (  item.debut|date('H:i:s') < '11:00:00' and  item.fin|date('H:i:s') > '11:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                
+                <td>{% for item in seances %}    {% if item.jour==3 %}{%  if  ( item.debut|date('H:i:s') >= '11:30:00' and  item.debut|date('H:i:s') <= '12:00:00' ) or (  item.debut|date('H:i:s') < '11:30:00' and  item.fin|date('H:i:s') > '11:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==3 %}{%  if  ( item.debut|date('H:i:s') >= '12:00:00' and  item.debut|date('H:i:s') <= '12:30:00' ) or (  item.debut|date('H:i:s') < '12:00:00' and  item.fin|date('H:i:s') > '12:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==3 %}{%  if  ( item.debut|date('H:i:s') >= '12:30:00' and  item.debut|date('H:i:s') <= '13:00:00' ) or (  item.debut|date('H:i:s') < '12:30:00' and  item.fin|date('H:i:s') > '12:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==3 %}{%  if  ( item.debut|date('H:i:s') >= '13:00:00' and  item.debut|date('H:i:s') <= '13:30:00' ) or (  item.debut|date('H:i:s') < '13:00:00' and  item.fin|date('H:i:s') > '13:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==3 %}{%  if  ( item.debut|date('H:i:s') >= '13:30:00' and  item.debut|date('H:i:s') <= '14:00:00' ) or (  item.debut|date('H:i:s') < '13:30:00' and  item.fin|date('H:i:s') > '13:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==3 %}{%  if  ( item.debut|date('H:i:s') >= '14:00:00' and  item.debut|date('H:i:s') <= '14:30:00' ) or (  item.debut|date('H:i:s') < '14:00:00' and  item.fin|date('H:i:s') > '14:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==3 %}{%  if  ( item.debut|date('H:i:s') >= '14:30:00' and  item.debut|date('H:i:s') <= '15:00:00' ) or (  item.debut|date('H:i:s') < '14:30:00' and  item.fin|date('H:i:s') > '14:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==3 %}{%  if  ( item.debut|date('H:i:s') >= '15:00:00' and  item.debut|date('H:i:s') <= '15:30:00' ) or (  item.debut|date('H:i:s') < '15:00:00' and  item.fin|date('H:i:s') > '15:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==3 %}{%  if  ( item.debut|date('H:i:s') >= '15:30:00' and  item.debut|date('H:i:s') <= '16:00:00' ) or (  item.debut|date('H:i:s') < '15:30:00' and  item.fin|date('H:i:s') > '15:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==3 %}{%  if  ( item.debut|date('H:i:s') >= '16:00:00' and  item.debut|date('H:i:s') <= '16:30:00' ) or (  item.debut|date('H:i:s') < '16:00:00' and  item.fin|date('H:i:s') > '16:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==3 %}{%  if  ( item.debut|date('H:i:s') >= '16:30:00' and  item.debut|date('H:i:s') <= '17:00:00' ) or (  item.debut|date('H:i:s') < '16:30:00' and  item.fin|date('H:i:s') > '16:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==3 %}{%  if  ( item.debut|date('H:i:s') >= '17:00:00' and  item.debut|date('H:i:s') <= '17:30:00' ) or (  item.debut|date('H:i:s') < '17:00:00' and  item.fin|date('H:i:s') > '17:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==3 %}{%  if  ( item.debut|date('H:i:s') >= '17:30:00' and  item.debut|date('H:i:s') <= '18:00:00' ) or (  item.debut|date('H:i:s') < '18:30:00' and  item.fin|date('H:i:s') > '17:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==3 %}{%  if  ( item.debut|date('H:i:s') >= '18:00:00' and  item.debut|date('H:i:s') <= '18:30:00' ) or (  item.debut|date('H:i:s') < '19:00:00' and  item.fin|date('H:i:s') > '18:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>	             </tr>
+				                    <tr>
+				                        <td>Mercredi</td>
+		<td>{% for item in seances %}
+{% if item.jour==4 %}
+
+
+				                        	{% if    item.debut|date('H:i:s') < '09:00:00'  and  item.fin|date('H:i:s') >= '09:00:00'   %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+
+
+
+				                        <td>{% for item in seances %}
+
+				                        	    {% if item.jour==4 %}{%  if  ( item.debut|date('H:i:s') >= '09:00:00' and  item.debut|date('H:i:s') <= '09:30:00' ) or (  item.debut|date('H:i:s') < '09:00:00' and  item.fin|date('H:i:s') > '09:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+				                        <td>{% for item in seances %}
+    {% if item.jour==4 %}{%  if  ( item.debut|date('H:i:s') >= '09:30:00' and  item.debut|date('H:i:s') <= '10:00:00' ) or (  item.debut|date('H:i:s') < '09:30:00' and  item.fin|date('H:i:s') > '09:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}
+
+
+				                        </td>
+
+
+
+
+
+
+
+
+
+
+
+                <td>{% for item in seances %}
+
+
+
+
+                	    {% if item.jour==4 %}{%  if  ( item.debut|date('H:i:s') >= '10:00:00' and  item.debut|date('H:i:s') <= '10:30:00' ) or (  item.debut|date('H:i:s') < '10:00:00' and  item.fin|date('H:i:s') > '10:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <td>
+
+
+                	{% for item in seances %}{% if item.jour==4 %}{%  if ( ( item.debut|date('H:i:s') >= '10:30:00' and  item.debut|date('H:i:s') <= '11:00:00' ) or (  item.debut|date('H:i:s') < '10:30:00' and  item.fin|date('H:i:s') > '10:30:00' ) ) %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+
+                <td>{% for item in seances %}    {% if item.jour==4 %}{%  if  ( item.debut|date('H:i:s') >= '11:00:00' and  item.debut|date('H:i:s') <= '11:30:00' ) or (  item.debut|date('H:i:s') < '11:00:00' and  item.fin|date('H:i:s') > '11:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                
+                <td>{% for item in seances %}    {% if item.jour==4 %}{%  if  ( item.debut|date('H:i:s') >= '11:30:00' and  item.debut|date('H:i:s') <= '12:00:00' ) or (  item.debut|date('H:i:s') < '11:30:00' and  item.fin|date('H:i:s') > '11:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==4 %}{%  if  ( item.debut|date('H:i:s') >= '12:00:00' and  item.debut|date('H:i:s') <= '12:30:00' ) or (  item.debut|date('H:i:s') < '12:00:00' and  item.fin|date('H:i:s') > '12:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==4 %}{%  if  ( item.debut|date('H:i:s') >= '12:30:00' and  item.debut|date('H:i:s') <= '13:00:00' ) or (  item.debut|date('H:i:s') < '12:30:00' and  item.fin|date('H:i:s') > '12:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==4 %}{%  if  ( item.debut|date('H:i:s') >= '13:00:00' and  item.debut|date('H:i:s') <= '13:30:00' ) or (  item.debut|date('H:i:s') < '13:00:00' and  item.fin|date('H:i:s') > '13:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==4 %}{%  if  ( item.debut|date('H:i:s') >= '13:30:00' and  item.debut|date('H:i:s') <= '14:00:00' ) or (  item.debut|date('H:i:s') < '13:30:00' and  item.fin|date('H:i:s') > '13:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==4 %}{%  if  ( item.debut|date('H:i:s') >= '14:00:00' and  item.debut|date('H:i:s') <= '14:30:00' ) or (  item.debut|date('H:i:s') < '14:00:00' and  item.fin|date('H:i:s') > '14:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==4 %}{%  if  ( item.debut|date('H:i:s') >= '14:30:00' and  item.debut|date('H:i:s') <= '15:00:00' ) or (  item.debut|date('H:i:s') < '14:30:00' and  item.fin|date('H:i:s') > '14:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==4 %}{%  if  ( item.debut|date('H:i:s') >= '15:00:00' and  item.debut|date('H:i:s') <= '15:30:00' ) or (  item.debut|date('H:i:s') < '15:00:00' and  item.fin|date('H:i:s') > '15:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==4 %}{%  if  ( item.debut|date('H:i:s') >= '15:30:00' and  item.debut|date('H:i:s') <= '16:00:00' ) or (  item.debut|date('H:i:s') < '15:30:00' and  item.fin|date('H:i:s') > '15:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==4 %}{%  if  ( item.debut|date('H:i:s') >= '16:00:00' and  item.debut|date('H:i:s') <= '16:30:00' ) or (  item.debut|date('H:i:s') < '16:00:00' and  item.fin|date('H:i:s') > '16:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==4 %}{%  if  ( item.debut|date('H:i:s') >= '16:30:00' and  item.debut|date('H:i:s') <= '17:00:00' ) or (  item.debut|date('H:i:s') < '16:30:00' and  item.fin|date('H:i:s') > '16:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==4 %}{%  if  ( item.debut|date('H:i:s') >= '17:00:00' and  item.debut|date('H:i:s') <= '17:30:00' ) or (  item.debut|date('H:i:s') < '17:00:00' and  item.fin|date('H:i:s') > '17:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==4 %}{%  if  ( item.debut|date('H:i:s') >= '17:30:00' and  item.debut|date('H:i:s') <= '18:00:00' ) or (  item.debut|date('H:i:s') < '18:30:00' and  item.fin|date('H:i:s') > '17:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==4 %}{%  if  ( item.debut|date('H:i:s') >= '18:00:00' and  item.debut|date('H:i:s') <= '18:30:00' ) or (  item.debut|date('H:i:s') < '19:00:00' and  item.fin|date('H:i:s') > '18:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>					                        				
+				                    </tr>
+				                <tr>
+				                        <td>Jeudi</td>
+				                        <td>{% for item in seances %}
+{% if item.jour==5 %}
+
+
+				                        	{% if    item.debut|date('H:i:s') < '09:00:00'  and  item.fin|date('H:i:s') >= '09:00:00'   %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+
+
+
+				                        <td>{% for item in seances %}
+
+				                        	    {% if item.jour==5 %}{%  if  ( item.debut|date('H:i:s') >= '09:00:00' and  item.debut|date('H:i:s') <= '09:30:00' ) or (  item.debut|date('H:i:s') < '09:00:00' and  item.fin|date('H:i:s') > '09:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+				                        <td>{% for item in seances %}
+    {% if item.jour==5 %}{%  if  ( item.debut|date('H:i:s') >= '09:30:00' and  item.debut|date('H:i:s') <= '10:00:00' ) or (  item.debut|date('H:i:s') < '09:30:00' and  item.fin|date('H:i:s') > '09:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}
+
+
+				                        </td>
+
+
+
+
+
+
+
+
+
+
+
+                <td>{% for item in seances %}
+
+
+
+
+                	    {% if item.jour==5 %}{%  if  ( item.debut|date('H:i:s') >= '10:00:00' and  item.debut|date('H:i:s') <= '10:30:00' ) or (  item.debut|date('H:i:s') < '10:00:00' and  item.fin|date('H:i:s') > '10:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <td>
+
+
+                	{% for item in seances %}{% if item.jour==5 %}{%  if ( ( item.debut|date('H:i:s') >= '10:30:00' and  item.debut|date('H:i:s') <= '11:00:00' ) or (  item.debut|date('H:i:s') < '10:30:00' and  item.fin|date('H:i:s') > '10:30:00' ) ) %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+
+                <td>{% for item in seances %}    {% if item.jour==5 %}{%  if  ( item.debut|date('H:i:s') >= '11:00:00' and  item.debut|date('H:i:s') <= '11:30:00' ) or (  item.debut|date('H:i:s') < '11:00:00' and  item.fin|date('H:i:s') > '11:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                
+                <td>{% for item in seances %}    {% if item.jour==5 %}{%  if  ( item.debut|date('H:i:s') >= '11:30:00' and  item.debut|date('H:i:s') <= '12:00:00' ) or (  item.debut|date('H:i:s') < '11:30:00' and  item.fin|date('H:i:s') > '11:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==5 %}{%  if  ( item.debut|date('H:i:s') >= '12:00:00' and  item.debut|date('H:i:s') <= '12:30:00' ) or (  item.debut|date('H:i:s') < '12:00:00' and  item.fin|date('H:i:s') > '12:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==5 %}{%  if  ( item.debut|date('H:i:s') >= '12:30:00' and  item.debut|date('H:i:s') <= '13:00:00' ) or (  item.debut|date('H:i:s') < '12:30:00' and  item.fin|date('H:i:s') > '12:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==5 %}{%  if  ( item.debut|date('H:i:s') >= '13:00:00' and  item.debut|date('H:i:s') <= '13:30:00' ) or (  item.debut|date('H:i:s') < '13:00:00' and  item.fin|date('H:i:s') > '13:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==5 %}{%  if  ( item.debut|date('H:i:s') >= '13:30:00' and  item.debut|date('H:i:s') <= '14:00:00' ) or (  item.debut|date('H:i:s') < '13:30:00' and  item.fin|date('H:i:s') > '13:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==5 %}{%  if  ( item.debut|date('H:i:s') >= '14:00:00' and  item.debut|date('H:i:s') <= '14:30:00' ) or (  item.debut|date('H:i:s') < '14:00:00' and  item.fin|date('H:i:s') > '14:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==5 %}{%  if  ( item.debut|date('H:i:s') >= '14:30:00' and  item.debut|date('H:i:s') <= '15:00:00' ) or (  item.debut|date('H:i:s') < '14:30:00' and  item.fin|date('H:i:s') > '14:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==5 %}{%  if  ( item.debut|date('H:i:s') >= '15:00:00' and  item.debut|date('H:i:s') <= '15:30:00' ) or (  item.debut|date('H:i:s') < '15:00:00' and  item.fin|date('H:i:s') > '15:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==5 %}{%  if  ( item.debut|date('H:i:s') >= '15:30:00' and  item.debut|date('H:i:s') <= '16:00:00' ) or (  item.debut|date('H:i:s') < '15:30:00' and  item.fin|date('H:i:s') > '15:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==5 %}{%  if  ( item.debut|date('H:i:s') >= '16:00:00' and  item.debut|date('H:i:s') <= '16:30:00' ) or (  item.debut|date('H:i:s') < '16:00:00' and  item.fin|date('H:i:s') > '16:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==5 %}{%  if  ( item.debut|date('H:i:s') >= '16:30:00' and  item.debut|date('H:i:s') <= '17:00:00' ) or (  item.debut|date('H:i:s') < '16:30:00' and  item.fin|date('H:i:s') > '16:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==5 %}{%  if  ( item.debut|date('H:i:s') >= '17:00:00' and  item.debut|date('H:i:s') <= '17:30:00' ) or (  item.debut|date('H:i:s') < '17:00:00' and  item.fin|date('H:i:s') > '17:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==5 %}{%  if  ( item.debut|date('H:i:s') >= '17:30:00' and  item.debut|date('H:i:s') <= '18:00:00' ) or (  item.debut|date('H:i:s') < '18:30:00' and  item.fin|date('H:i:s') > '17:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==5 %}{%  if  ( item.debut|date('H:i:s') >= '18:00:00' and  item.debut|date('H:i:s') <= '18:30:00' ) or (  item.debut|date('H:i:s') < '19:00:00' and  item.fin|date('H:i:s') > '18:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>				                        				
+				                    </tr>	
+				                <tr>
+				                        <td>Vendredi</td>
+				                      <td>{% for item in seances %}
+{% if item.jour==6 %}
+
+
+				                        	{% if    item.debut|date('H:i:s') < '09:00:00'  and  item.fin|date('H:i:s') >= '09:00:00'   %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+
+
+
+				                        <td>{% for item in seances %}
+
+				                        	    {% if item.jour==6 %}{%  if  ( item.debut|date('H:i:s') >= '09:00:00' and  item.debut|date('H:i:s') <= '09:30:00' ) or (  item.debut|date('H:i:s') < '09:00:00' and  item.fin|date('H:i:s') > '09:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+				                        <td>{% for item in seances %}
+    {% if item.jour==6 %}{%  if  ( item.debut|date('H:i:s') >= '09:30:00' and  item.debut|date('H:i:s') <= '10:00:00' ) or (  item.debut|date('H:i:s') < '09:30:00' and  item.fin|date('H:i:s') > '09:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}
+
+
+				                        </td>
+
+
+
+
+
+
+
+
+
+
+
+                <td>{% for item in seances %}
+
+
+
+
+                	    {% if item.jour==6 %}{%  if  ( item.debut|date('H:i:s') >= '10:00:00' and  item.debut|date('H:i:s') <= '10:30:00' ) or (  item.debut|date('H:i:s') < '10:00:00' and  item.fin|date('H:i:s') > '10:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <td>
+
+
+                	{% for item in seances %}{% if item.jour==6 %}{%  if ( ( item.debut|date('H:i:s') >= '10:30:00' and  item.debut|date('H:i:s') <= '11:00:00' ) or (  item.debut|date('H:i:s') < '10:30:00' and  item.fin|date('H:i:s') > '10:30:00' ) ) %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+
+                <td>{% for item in seances %}    {% if item.jour==6 %}{%  if  ( item.debut|date('H:i:s') >= '11:00:00' and  item.debut|date('H:i:s') <= '11:30:00' ) or (  item.debut|date('H:i:s') < '11:00:00' and  item.fin|date('H:i:s') > '11:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                
+                <td>{% for item in seances %}    {% if item.jour==6 %}{%  if  ( item.debut|date('H:i:s') >= '11:30:00' and  item.debut|date('H:i:s') <= '12:00:00' ) or (  item.debut|date('H:i:s') < '11:30:00' and  item.fin|date('H:i:s') > '11:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==6 %}{%  if  ( item.debut|date('H:i:s') >= '12:00:00' and  item.debut|date('H:i:s') <= '12:30:00' ) or (  item.debut|date('H:i:s') < '12:00:00' and  item.fin|date('H:i:s') > '12:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==6 %}{%  if  ( item.debut|date('H:i:s') >= '12:30:00' and  item.debut|date('H:i:s') <= '13:00:00' ) or (  item.debut|date('H:i:s') < '12:30:00' and  item.fin|date('H:i:s') > '12:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==6 %}{%  if  ( item.debut|date('H:i:s') >= '13:00:00' and  item.debut|date('H:i:s') <= '13:30:00' ) or (  item.debut|date('H:i:s') < '13:00:00' and  item.fin|date('H:i:s') > '13:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==6 %}{%  if  ( item.debut|date('H:i:s') >= '13:30:00' and  item.debut|date('H:i:s') <= '14:00:00' ) or (  item.debut|date('H:i:s') < '13:30:00' and  item.fin|date('H:i:s') > '13:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==6 %}{%  if  ( item.debut|date('H:i:s') >= '14:00:00' and  item.debut|date('H:i:s') <= '14:30:00' ) or (  item.debut|date('H:i:s') < '14:00:00' and  item.fin|date('H:i:s') > '14:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==6 %}{%  if  ( item.debut|date('H:i:s') >= '14:30:00' and  item.debut|date('H:i:s') <= '15:00:00' ) or (  item.debut|date('H:i:s') < '14:30:00' and  item.fin|date('H:i:s') > '14:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==6 %}{%  if  ( item.debut|date('H:i:s') >= '15:00:00' and  item.debut|date('H:i:s') <= '15:30:00' ) or (  item.debut|date('H:i:s') < '15:00:00' and  item.fin|date('H:i:s') > '15:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==6 %}{%  if  ( item.debut|date('H:i:s') >= '15:30:00' and  item.debut|date('H:i:s') <= '16:00:00' ) or (  item.debut|date('H:i:s') < '15:30:00' and  item.fin|date('H:i:s') > '15:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==6 %}{%  if  ( item.debut|date('H:i:s') >= '16:00:00' and  item.debut|date('H:i:s') <= '16:30:00' ) or (  item.debut|date('H:i:s') < '16:00:00' and  item.fin|date('H:i:s') > '16:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==6 %}{%  if  ( item.debut|date('H:i:s') >= '16:30:00' and  item.debut|date('H:i:s') <= '17:00:00' ) or (  item.debut|date('H:i:s') < '16:30:00' and  item.fin|date('H:i:s') > '16:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==6 %}{%  if  ( item.debut|date('H:i:s') >= '17:00:00' and  item.debut|date('H:i:s') <= '17:30:00' ) or (  item.debut|date('H:i:s') < '17:00:00' and  item.fin|date('H:i:s') > '17:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==6 %}{%  if  ( item.debut|date('H:i:s') >= '17:30:00' and  item.debut|date('H:i:s') <= '18:00:00' ) or (  item.debut|date('H:i:s') < '18:30:00' and  item.fin|date('H:i:s') > '17:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==6 %}{%  if  ( item.debut|date('H:i:s') >= '18:00:00' and  item.debut|date('H:i:s') <= '18:30:00' ) or (  item.debut|date('H:i:s') < '19:00:00' and  item.fin|date('H:i:s') > '18:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>			                        				
+				                    </tr>
+				                <tr>
+				                        <td>Samedi</td>
+				                      <td>{% for item in seances %}
+{% if item.jour==7 %}
+
+
+				                        	{% if    item.debut|date('H:i:s') < '09:00:00'  and  item.fin|date('H:i:s') >= '09:00:00'   %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+
+
+
+				                        <td>{% for item in seances %}
+
+				                        	    {% if item.jour==7%}{%  if  ( item.debut|date('H:i:s') >= '09:00:00' and  item.debut|date('H:i:s') <= '09:30:00' ) or (  item.debut|date('H:i:s') < '09:00:00' and  item.fin|date('H:i:s') > '09:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+				                        <td>{% for item in seances %}
+    {% if item.jour==7 %}{%  if  ( item.debut|date('H:i:s') >= '09:30:00' and  item.debut|date('H:i:s') <= '10:00:00' ) or (  item.debut|date('H:i:s') < '09:30:00' and  item.fin|date('H:i:s') > '09:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}
+
+
+				                        </td>
+
+
+
+
+
+
+
+
+
+
+
+                <td>{% for item in seances %}
+
+
+
+
+                	    {% if item.jour==7 %}{%  if  ( item.debut|date('H:i:s') >= '10:00:00' and  item.debut|date('H:i:s') <= '10:30:00' ) or (  item.debut|date('H:i:s') < '10:00:00' and  item.fin|date('H:i:s') > '10:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+
+
+
+
+
+
+
+
+
+                <td>
+
+
+                    {% for item in seances %}{% if item.jour==7 %}{%  if ( ( item.debut|date('H:i:s') >= '10:30:00' and  item.debut|date('H:i:s') <= '11:00:00' ) or (  item.debut|date('H:i:s') < '10:30:00' and  item.fin|date('H:i:s') > '10:30:00' ) ) %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+
+                <td>{% for item in seances %}    {% if item.jour==7 %}{%  if  ( item.debut|date('H:i:s') >= '11:00:00' and  item.debut|date('H:i:s') <= '11:30:00' ) or (  item.debut|date('H:i:s') < '11:00:00' and  item.fin|date('H:i:s') > '11:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                
+                <td>{% for item in seances %}    {% if item.jour==7 %}{%  if  ( item.debut|date('H:i:s') >= '11:30:00' and  item.debut|date('H:i:s') <= '12:00:00' ) or (  item.debut|date('H:i:s') < '11:30:00' and  item.fin|date('H:i:s') > '11:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==7 %}{%  if  ( item.debut|date('H:i:s') >= '12:00:00' and  item.debut|date('H:i:s') <= '12:30:00' ) or (  item.debut|date('H:i:s') < '12:00:00' and  item.fin|date('H:i:s') > '12:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==7 %}{%  if  ( item.debut|date('H:i:s') >= '12:30:00' and  item.debut|date('H:i:s') <= '13:00:00' ) or (  item.debut|date('H:i:s') < '12:30:00' and  item.fin|date('H:i:s') > '12:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==7 %}{%  if  ( item.debut|date('H:i:s') >= '13:00:00' and  item.debut|date('H:i:s') <= '13:30:00' ) or (  item.debut|date('H:i:s') < '13:00:00' and  item.fin|date('H:i:s') > '13:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==7 %}{%  if  ( item.debut|date('H:i:s') >= '13:30:00' and  item.debut|date('H:i:s') <= '14:00:00' ) or (  item.debut|date('H:i:s') < '13:30:00' and  item.fin|date('H:i:s') > '13:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==7 %}{%  if  ( item.debut|date('H:i:s') >= '14:00:00' and  item.debut|date('H:i:s') <= '14:30:00' ) or (  item.debut|date('H:i:s') < '14:00:00' and  item.fin|date('H:i:s') > '14:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==7 %}{%  if  ( item.debut|date('H:i:s') >= '14:30:00' and  item.debut|date('H:i:s') <= '15:00:00' ) or (  item.debut|date('H:i:s') < '14:30:00' and  item.fin|date('H:i:s') > '14:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==7 %}{%  if  ( item.debut|date('H:i:s') >= '15:00:00' and  item.debut|date('H:i:s') <= '15:30:00' ) or (  item.debut|date('H:i:s') < '15:00:00' and  item.fin|date('H:i:s') > '15:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==7 %}{%  if  ( item.debut|date('H:i:s') >= '15:30:00' and  item.debut|date('H:i:s') <= '16:00:00' ) or (  item.debut|date('H:i:s') < '15:30:00' and  item.fin|date('H:i:s') > '15:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==7 %}{%  if  ( item.debut|date('H:i:s') >= '16:00:00' and  item.debut|date('H:i:s') <= '16:30:00' ) or (  item.debut|date('H:i:s') < '16:00:00' and  item.fin|date('H:i:s') > '16:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==7 %}{%  if  ( item.debut|date('H:i:s') >= '16:30:00' and  item.debut|date('H:i:s') <= '17:00:00' ) or (  item.debut|date('H:i:s') < '16:30:00' and  item.fin|date('H:i:s') > '16:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==7 %}{%  if  ( item.debut|date('H:i:s') >= '17:00:00' and  item.debut|date('H:i:s') <= '17:30:00' ) or (  item.debut|date('H:i:s') < '17:00:00' and  item.fin|date('H:i:s') > '17:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==7 %}{%  if  ( item.debut|date('H:i:s') >= '17:30:00' and  item.debut|date('H:i:s') <= '18:00:00' ) or (  item.debut|date('H:i:s') < '18:30:00' and  item.fin|date('H:i:s') > '17:30:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>
+                <td>{% for item in seances %}    {% if item.jour==7 %}{%  if  ( item.debut|date('H:i:s') >= '18:00:00' and  item.debut|date('H:i:s') <= '18:30:00' ) or (  item.debut|date('H:i:s') < '19:00:00' and  item.fin|date('H:i:s') > '18:00:00' )  %}{{ item.description}}{% endif %}{% endif %}{% endfor %}</td>                                         
+                                    </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+	
+				               
+      			</tbody>
+            </table>
+</div></div>
+{% endblock  %}
